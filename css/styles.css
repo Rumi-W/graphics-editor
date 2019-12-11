@@ -1,0 +1,99 @@
+* {
+  box-sizing: inherit;
+}
+html {
+  height: 100%;
+  font-size: 62.5%;
+}
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+main {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+aside {
+  width: 30%;
+  padding: 2%;
+  background-color: #f6f6f6;
+  display: flex;
+  justify-content: center;
+}
+
+.box {
+  display: inline-block;
+  width: 20vmin;
+  height: 20vmin;
+  border: 2px gray solid;
+  background-color: #fff;
+}
+
+section {
+  width: 70%;
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.offset-img {
+  display: block;
+  background: yellow;
+  width: 78vmin;
+  height: 10vmin;
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+.canvas {
+  width: 80vmin;
+  height: 80vmin;
+}
+
+.item-img {
+  position: absolute;
+  width: 20vmin;
+  height: 20vmin;
+  margin: 0 auto;
+  background: url('../images/image1.png');
+  background-size: cover;
+  cursor: pointer;
+}
+
+.resizer {
+  position: absolute;
+  width: 1.2rem;
+  height: 1.2rem;
+  background-color: #000;
+  z-index: 30;
+}
+
+.resizer.ne {
+  top: -1px;
+  right: -1px;
+  cursor: ne-resize;
+}
+
+.resizer.nw {
+  top: -1px;
+  left: -1px;
+  cursor: nw-resize;
+}
+
+.resizer.se {
+  bottom: -1px;
+  right: -1px;
+  cursor: se-resize;
+}
+
+.resizer.sw {
+  bottom: -1px;
+  left: -1px;
+  cursor: sw-resize;
+}
