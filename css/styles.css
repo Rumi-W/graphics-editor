@@ -13,13 +13,14 @@ body {
 main {
   height: 100%;
   width: 100%;
+  min-width: 1000px;
   padding: 0;
   display: flex;
   justify-content: center;
 }
 aside {
-  position: relative;
-  left: 0;
+  /* position: relative; */
+  /* left: 0; */
   width: 30%;
   min-width: 30rem;
   padding: 2%;
@@ -49,6 +50,7 @@ aside {
 
 section {
   width: 70%;
+  min-width: 800px;
   background-color: red;
   display: flex;
   flex-direction: column;
