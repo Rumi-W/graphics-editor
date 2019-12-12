@@ -1,14 +1,22 @@
 class ResizeElement {
-  constructor(imgElement, elementModel, offsetImgElem) {
-    this.element = imgElement;
-    this.elementModel = elementModel;
-    this.offsetImgElem = offsetImgElem;
+  constructor(element, offSetsModel, isText) {
+    this.element = element;
+    this.offSetsModel = offSetsModel;
     this.resizers = this.element.children;
     this.startX = null;
     this.startY = null;
     this.startWidth = null;
     this.tartHeight = null;
     this.currentResizer = null;
+    this.textElem = { isText: isText, textContent: '', fontSpaceRatio: null };
+
+    if (this.textElem.isText) {
+      //Find the original font size and div width of the text element
+      const font = window.getComputedStyle(this.element, null).getPropertyValue('font-size');
+      const width = window.getComputedStyle(this.element, null).getPropertyValue('width');
+
+      this.textElem.fontSpaceRatio = parseFloat(font) / parseFloat(width);
+    }
   }
 
   bindEvent = () => {
@@ -24,6 +32,8 @@ class ResizeElement {
 
   resizerMouseDown = e => {
     this.currentResizer = e.target;
+
+    // If the element isn't a resizer element, cancel.
     if (!this.currentResizer.classList.contains('resizer')) return;
 
     this.startX = e.clientX;
@@ -34,34 +44,33 @@ class ResizeElement {
 
   onMouseUp = e => {
     document.removeEventListener('mousemove', this.startResizing);
-    this.elementModel.displayOffset();
+    this.offSetsModel.displayOffset();
   };
 
   startResizing = e => {
     if (this.currentResizer.classList.contains('se')) {
-      //console.log('se');
       this.element.style.width = this.startRec.width - (this.startX - e.clientX) + 'px';
       this.element.style.height = this.startRec.height - (this.startY - e.clientY) + 'px';
     } else if (this.currentResizer.classList.contains('ne')) {
-      //console.log('ne');
       this.element.style.width = this.startRec.width - (this.startX - e.clientX) + 'px';
       this.element.style.height = this.startRec.height + (this.startY - e.clientY) + 'px';
       this.element.style.top = this.startRec.top - (this.startY - e.clientY) + 'px';
     } else if (this.currentResizer.classList.contains('sw')) {
-      //console.log('sw');
       this.element.style.width = this.startRec.width + (this.startX - e.clientX) + 'px';
       this.element.style.height = this.startRec.height - (this.startY - e.clientY) + 'px';
       this.element.style.left = this.startRec.left - (this.startX - e.clientX) + 'px';
     } else if (this.currentResizer.classList.contains('nw')) {
-      //console.log('nw');
       this.element.style.width = this.startRec.width + (this.startX - e.clientX) + 'px';
       this.element.style.height = this.startRec.height + (this.startY - e.clientY) + 'px';
       this.element.style.top = this.startRec.top - (this.startY - e.clientY) + 'px';
       this.element.style.left = this.startRec.left - (this.startX - e.clientX) + 'px';
     }
-
-    this.elementModel.setOffsetX(this.element.offsetLeft);
-    this.elementModel.setOffsetY(this.element.offsetTop);
+    if (this.textElem.isText) {
+      const fontSize = this.element.style.width.split('px')[0] * this.textElem.fontSpaceRatio;
+      this.element.style.fontSize = fontSize + 'px';
+    }
+    this.offSetsModel.setOffsetX(this.element.offsetLeft);
+    this.offSetsModel.setOffsetY(this.element.offsetTop);
   };
 }
 

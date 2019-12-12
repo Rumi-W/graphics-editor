@@ -1,8 +1,10 @@
 const elements = {
   imgElement: document.querySelector('.item-img'),
-  imgOrigin: document.querySelector('.origin'),
+  imgOrigin: document.querySelector('.img-origin'),
+  textElement: document.querySelector('.item-text'),
+  textOrigin: document.querySelector('.text-origin'),
   canvas: document.querySelector('.canvas'),
-  offsetImgElem: document.querySelector('.offset-img')
+  offsetDisplayElem: document.querySelector('.offset-display')
 };
 
 export default elements;

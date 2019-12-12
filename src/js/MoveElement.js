@@ -1,9 +1,9 @@
 class MoveElement {
-  constructor(imgElement, imgOrigin, canvas, elementModel, offsetImgElem) {
-    this.element = imgElement;
-    this.elementModel = elementModel;
+  constructor(element, imgOrigin, canvas, offSetsModel, offsetImgElem) {
+    this.element = element;
+    this.offSetsModel = offSetsModel;
     this.offsetImgElem = offsetImgElem;
-    this.imgOrigin = imgOrigin;
+    this.elemOrigin = imgOrigin;
     this.canvas = canvas;
     this.origX = this.element.getBoundingClientRect().left;
     this.origY = this.element.getBoundingClientRect().top;
@@ -21,7 +21,7 @@ class MoveElement {
     const classes = e.target.classList;
     if (classes.contains('resizer')) {
       this.active = false;
-    } else if (classes.contains('item-img')) {
+    } else if (classes.contains('source')) {
       this.active = true;
     } else {
       this.active = false;
@@ -37,9 +37,9 @@ class MoveElement {
     if (this.active) {
       document.removeEventListener('mousemove', this.onDocMouseMove);
 
-      this.elementModel.setOffsetX(this.element.offsetLeft);
-      this.elementModel.setOffsetY(this.element.offsetTop);
-      this.elementModel.displayOffset();
+      this.offSetsModel.setOffsetX(this.element.offsetLeft);
+      this.offSetsModel.setOffsetY(this.element.offsetTop);
+      this.offSetsModel.displayOffset();
     }
   };
 
@@ -62,7 +62,7 @@ class MoveElement {
   moveBackToOrigin = e => {
     this.element.style.left = this.origX + 'px';
     this.element.style.top = this.origY + 'px';
-    this.imgOrigin.append(this.element);
+    this.elemOrigin.append(this.element);
   };
 }
 

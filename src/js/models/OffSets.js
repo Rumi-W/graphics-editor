@@ -1,10 +1,11 @@
-class Element {
-  constructor(offsetImgElem) {
+class OffSets {
+  constructor(offsetImgElem, label) {
     this.offsetImgElem = offsetImgElem;
     this.offset = {
       x: null,
       y: null
     };
+    this.label = label;
   }
 
   setOffsetX = x => {
@@ -20,8 +21,8 @@ class Element {
   };
 
   displayOffset = () => {
-    this.offsetImgElem.innerHTML = `Image Offset: X ${this.offset.x}, Y ${this.offset.y}`;
+    this.offsetImgElem.innerHTML = `${this.label}: X ${this.offset.x}, Y ${this.offset.y}`;
   };
 }
 
-export default Element;
+export default OffSets;
