@@ -21,8 +21,8 @@ main {
 aside {
   /* position: relative; */
   /* left: 0; */
-  width: 30%;
-  min-width: 30rem;
+  width: 20%;
+  min-width: 20rem;
   padding: 2%;
   background-color: #f6f6f6;
   display: flex;
@@ -49,7 +49,7 @@ aside {
 }
 
 section {
-  width: 70%;
+  width: 80%;
   min-width: 800px;
   background-color: red;
   display: flex;
