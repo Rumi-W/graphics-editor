@@ -9,11 +9,11 @@ class Offsets {
   }
 
   setOffsetX = x => {
-    this.offset = { ...this.offset, x };
+    this.offset = { ...this.offset, x: Math.round(x) };
   };
 
   setOffsetY = y => {
-    this.offset = { ...this.offset, y };
+    this.offset = { ...this.offset, y: Math.round(y) };
   };
 
   getOffset = () => {
@@ -21,13 +21,27 @@ class Offsets {
   };
 
   calculateOffsetToParent = (parentElem, elem) => {
-    console.log(parentElem.getBoundingClientRect().left - elem.getBoundingClientRect().left);
+    console.log(parentElem.getBoundingClientRect().left, this.offset.x);
     this.setOffsetX(
       Math.round(elem.getBoundingClientRect().left - parentElem.getBoundingClientRect().left)
     );
 
     this.setOffsetY(
       Math.round(elem.getBoundingClientRect().top - parentElem.getBoundingClientRect().top)
+    );
+  };
+
+  calculateShiftedCoords = parentElem => {
+    return {
+      x: Math.round(parentElem.getBoundingClientRect().left) + this.offset.x,
+      y: Math.round(parentElem.getBoundingClientRect().top) + this.offset.y
+    };
+  };
+
+  isInCanvas = (parentElem, elem) => {
+    return (
+      Math.round(elem.getBoundingClientRect().left) >=
+      Math.round(parentElem.getBoundingClientRect().left)
     );
   };
 

@@ -1,10 +1,7 @@
-import * as $ from 'jQuery';
-
 class MoveElement {
-  constructor(element, imgOrigin, canvas, offSetsModel, offsetImgElem) {
+  constructor(element, imgOrigin, canvas, offSetsModel) {
     this.element = element;
     this.offSetsModel = offSetsModel;
-    this.offsetImgElem = offsetImgElem;
     this.elemOrigin = imgOrigin;
     this.canvas = canvas;
     this.origX = this.element.getBoundingClientRect().left;
@@ -17,24 +14,14 @@ class MoveElement {
   bindEvent = () => {
     this.element.addEventListener('mousedown', this.onMouseDown);
     this.element.addEventListener('mouseup', this.onMouseUp);
-
     window.addEventListener('resize', this.onWindowResize);
   };
 
   onWindowResize = () => {
-    console.log('canvas left', this.canvas.getBoundingClientRect().left);
-    console.log('canvas top', this.canvas.getBoundingClientRect().top);
-
-    const newOffsetX = this.canvas.getBoundingClientRect().left - this.offSetsModel.getOffset().x;
-    const newOffsetY = this.canvas.getBoundingClientRect().top - this.offSetsModel.getOffset().y;
-
-    console.log('new xy', newOffsetX, newOffsetY);
-    $('#item-img').css({ top: newOffsetY, left: newOffsetX });
-
-    this.offSetsModel.setOffsetX(newOffsetX);
-    this.offSetsModel.setOffsetY(newOffsetY);
-
-    this.offSetsModel.displayOffset();
+    if (this.offSetsModel.isInCanvas(this.canvas, this.element)) {
+      const shiftedCoords = this.offSetsModel.calculateShiftedCoords(this.canvas);
+      this.moveTo(shiftedCoords.x, shiftedCoords.y);
+    }
   };
 
   onMouseDown = e => {
@@ -67,15 +54,19 @@ class MoveElement {
       if (Math.abs(e.pageX - this.origX) < 160.0) {
         this.moveBackToOrigin();
       } else {
-        this.moveTo(e.pageX, e.pageY);
+        this.moveTo(Math.round(e.pageX - this.shiftX), Math.round(e.pageY - this.shiftY));
       }
     }
   };
 
   moveTo = (pageX, pageY) => {
-    this.element.style.left = pageX - this.shiftX + 'px';
-    this.element.style.top = pageY - this.shiftY + 'px';
-    this.canvas.append(this.element);
+    this.element.style.left = pageX + 'px';
+    this.element.style.top = pageY + 'px';
+
+    console.log('moved', this.element.parentElement.classList.contains('canvas'));
+    if (!this.element.parentElement.classList.contains('canvas')) {
+      this.canvas.append(this.element);
+    }
   };
 
   moveBackToOrigin = e => {

@@ -5,8 +5,6 @@ class ResizeElement {
     this.resizers = this.element.children;
     this.startX = null;
     this.startY = null;
-    this.startWidth = null;
-    this.tartHeight = null;
     this.currentResizer = null;
     this.canvas = canvas;
     this.textElem = { isText: isText, textContent: '', fontSpaceRatio: null };
@@ -50,28 +48,30 @@ class ResizeElement {
 
   startResizing = e => {
     if (this.currentResizer.classList.contains('se')) {
-      this.element.style.width = this.startRec.width - (this.startX - e.clientX) + 'px';
-      this.element.style.height = this.startRec.height - (this.startY - e.clientY) + 'px';
+      this.element.style.width = Math.round(this.startRec.width - (this.startX - e.clientX)) + 'px';
+      this.element.style.height =
+        Math.round(this.startRec.height - (this.startY - e.clientY)) + 'px';
     } else if (this.currentResizer.classList.contains('ne')) {
-      this.element.style.width = this.startRec.width - (this.startX - e.clientX) + 'px';
-      this.element.style.height = this.startRec.height + (this.startY - e.clientY) + 'px';
-      this.element.style.top = this.startRec.top - (this.startY - e.clientY) + 'px';
+      this.element.style.width = Math.round(this.startRec.width - (this.startX - e.clientX)) + 'px';
+      this.element.style.height =
+        Math.round(this.startRec.height + (this.startY - e.clientY)) + 'px';
+      this.element.style.top = Math.round(this.startRec.top - (this.startY - e.clientY)) + 'px';
     } else if (this.currentResizer.classList.contains('sw')) {
-      this.element.style.width = this.startRec.width + (this.startX - e.clientX) + 'px';
-      this.element.style.height = this.startRec.height - (this.startY - e.clientY) + 'px';
-      this.element.style.left = this.startRec.left - (this.startX - e.clientX) + 'px';
+      this.element.style.width = Math.round(this.startRec.width + (this.startX - e.clientX)) + 'px';
+      this.element.style.height =
+        Math.round(this.startRec.height - (this.startY - e.clientY)) + 'px';
+      this.element.style.left = Math.round(this.startRec.left - (this.startX - e.clientX)) + 'px';
     } else if (this.currentResizer.classList.contains('nw')) {
-      this.element.style.width = this.startRec.width + (this.startX - e.clientX) + 'px';
-      this.element.style.height = this.startRec.height + (this.startY - e.clientY) + 'px';
-      this.element.style.top = this.startRec.top - (this.startY - e.clientY) + 'px';
-      this.element.style.left = this.startRec.left - (this.startX - e.clientX) + 'px';
+      this.element.style.width = Math.round(this.startRec.width + (this.startX - e.clientX)) + 'px';
+      this.element.style.height =
+        Math.round(this.startRec.height + (this.startY - e.clientY)) + 'px';
+      this.element.style.top = Math.round(this.startRec.top - (this.startY - e.clientY)) + 'px';
+      this.element.style.left = Math.round(this.startRec.left - (this.startX - e.clientX)) + 'px';
     }
     if (this.textElem.isText) {
       const fontSize = this.element.style.width.split('px')[0] * this.textElem.fontSpaceRatio;
-      this.element.style.fontSize = fontSize + 'px';
+      this.element.style.fontSize = Math.round(fontSize) + 'px';
     }
-    // this.offSetsModel.setOffsetX(this.element.offsetLeft);
-    // this.offSetsModel.setOffsetY(this.element.offsetTop);
     this.offSetsModel.calculateOffsetToParent(this.canvas, this.element);
   };
 }
