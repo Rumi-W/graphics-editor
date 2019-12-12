@@ -18,12 +18,15 @@ main {
   justify-content: center;
 }
 aside {
+  position: relative;
+  left: 0;
   width: 30%;
+  min-width: 30rem;
   padding: 2%;
   background-color: #f6f6f6;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -37,6 +40,7 @@ aside {
 
 .box.text-origin {
   display: inline-block;
+  margin-top: 5rem;
   width: 24vmin;
   height: 6vmin;
   border: 2px gray solid;

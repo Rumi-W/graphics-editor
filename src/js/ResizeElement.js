@@ -1,5 +1,5 @@
 class ResizeElement {
-  constructor(element, offSetsModel, isText) {
+  constructor(element, offSetsModel, canvas, isText) {
     this.element = element;
     this.offSetsModel = offSetsModel;
     this.resizers = this.element.children;
@@ -8,6 +8,7 @@ class ResizeElement {
     this.startWidth = null;
     this.tartHeight = null;
     this.currentResizer = null;
+    this.canvas = canvas;
     this.textElem = { isText: isText, textContent: '', fontSpaceRatio: null };
 
     if (this.textElem.isText) {
@@ -69,8 +70,9 @@ class ResizeElement {
       const fontSize = this.element.style.width.split('px')[0] * this.textElem.fontSpaceRatio;
       this.element.style.fontSize = fontSize + 'px';
     }
-    this.offSetsModel.setOffsetX(this.element.offsetLeft);
-    this.offSetsModel.setOffsetY(this.element.offsetTop);
+    // this.offSetsModel.setOffsetX(this.element.offsetLeft);
+    // this.offSetsModel.setOffsetY(this.element.offsetTop);
+    this.offSetsModel.calculateOffsetToParent(this.canvas, this.element);
   };
 }
 

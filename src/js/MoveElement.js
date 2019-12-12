@@ -1,3 +1,5 @@
+import * as $ from 'jQuery';
+
 class MoveElement {
   constructor(element, imgOrigin, canvas, offSetsModel, offsetImgElem) {
     this.element = element;
@@ -15,6 +17,24 @@ class MoveElement {
   bindEvent = () => {
     this.element.addEventListener('mousedown', this.onMouseDown);
     this.element.addEventListener('mouseup', this.onMouseUp);
+
+    window.addEventListener('resize', this.onWindowResize);
+  };
+
+  onWindowResize = () => {
+    console.log('canvas left', this.canvas.getBoundingClientRect().left);
+    console.log('canvas top', this.canvas.getBoundingClientRect().top);
+
+    const newOffsetX = this.canvas.getBoundingClientRect().left - this.offSetsModel.getOffset().x;
+    const newOffsetY = this.canvas.getBoundingClientRect().top - this.offSetsModel.getOffset().y;
+
+    console.log('new xy', newOffsetX, newOffsetY);
+    $('#item-img').css({ top: newOffsetY, left: newOffsetX });
+
+    this.offSetsModel.setOffsetX(newOffsetX);
+    this.offSetsModel.setOffsetY(newOffsetY);
+
+    this.offSetsModel.displayOffset();
   };
 
   onMouseDown = e => {
@@ -37,8 +57,7 @@ class MoveElement {
     if (this.active) {
       document.removeEventListener('mousemove', this.onDocMouseMove);
 
-      this.offSetsModel.setOffsetX(this.element.offsetLeft);
-      this.offSetsModel.setOffsetY(this.element.offsetTop);
+      this.offSetsModel.calculateOffsetToParent(this.canvas, this.element);
       this.offSetsModel.displayOffset();
     }
   };
