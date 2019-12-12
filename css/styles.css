@@ -22,13 +22,23 @@ aside {
   padding: 2%;
   background-color: #f6f6f6;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .box {
   display: inline-block;
   width: 20vmin;
   height: 20vmin;
+  border: 2px gray solid;
+  background-color: #fff;
+}
+
+.box.text-origin {
+  display: inline-block;
+  width: 24vmin;
+  height: 6vmin;
   border: 2px gray solid;
   background-color: #fff;
 }
@@ -42,7 +52,7 @@ section {
   align-items: center;
 }
 
-.offset-img {
+.offset-display {
   display: block;
   background: yellow;
   width: 78vmin;
@@ -63,6 +73,17 @@ section {
   margin: 0 auto;
   background: url('../images/image1.png');
   background-size: cover;
+  cursor: pointer;
+}
+
+.item-text {
+  display: inline-block;
+  position: absolute;
+  width: 24vmin;
+  height: 6vmin;
+  margin: 0 auto;
+  font-size: 5rem;
+  text-align: center;
   cursor: pointer;
 }
 
