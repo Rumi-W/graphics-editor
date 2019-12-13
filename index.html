@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equip="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="css/styles.css" />
-    <title>Image Editor</title>
+    <title>Graphics Editor</title>
   </head>
   <body>
     <main>
       <aside>
         <div class="box img-origin">
-          <div class="source item-img">
+          <div id="item-img" class="source item-img">
             <div class="resizer ne"></div>
             <div class="resizer nw"></div>
             <div class="resizer se"></div>
@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="box text-origin">
-          <div class="source item-text">
+          <div id="item-text" class="source item-text">
             Breakfast
             <div class="resizer ne"></div>
             <div class="resizer nw"></div>
@@ -29,7 +29,29 @@
         </div>
       </aside>
       <section>
-        <div class="offset-display">dddd</div>
+        <div class="offset">
+          <div class="offset-display"></div>
+          <div class="button-holder">
+            <button
+              type="button"
+              id="button-done"
+              alt="Done"
+              title="Finish Edit"
+              class="button done"
+            >
+              Done
+            </button>
+            <button
+              type="button"
+              id="button-eidt"
+              alt="Edit"
+              title="Resume Edit"
+              class="button edit"
+            >
+              Edit
+            </button>
+          </div>
+        </div>
         <div class="box canvas"></div>
       </section>
     </main>
