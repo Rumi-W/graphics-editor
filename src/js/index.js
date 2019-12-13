@@ -28,6 +28,7 @@ let isText = false;
 
 let newOffsetElemImg = document.createElement('div');
 newOffsetElemImg.classList.add('offset-img');
+newOffsetElemImg.classList.add('select-diabled');
 offsetDisplayElem.append(newOffsetElemImg);
 const offsetsModelImg = new Offsets(newOffsetElemImg, 'Image Offset');
 
@@ -39,6 +40,7 @@ isText = true;
 
 let newOffsetElemText = document.createElement('div');
 newOffsetElemText.classList.add('offset-text');
+newOffsetElemText.classList.add('select-diabled');
 offsetDisplayElem.append(newOffsetElemText);
 const offsetsModelText = new Offsets(newOffsetElemText, 'Text Offset');
 
