@@ -1,4 +1,4 @@
-# Graphics-Editor
+# graphics-editor
 
 ## Application built on Vanilla JavaScript
 
