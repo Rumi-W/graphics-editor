@@ -22,7 +22,7 @@ class Element {
     this.textElem = { isText: isText, textContent: '', fontSpaceRatio: null };
 
     if (this.textElem.isText) {
-      //Find the original font size and div width of the text element
+      //Find the original font size and div width of the text element - Used when Window is resized.
       const font = window.getComputedStyle(this.element, null).getPropertyValue('font-size');
       const width = window.getComputedStyle(this.element, null).getPropertyValue('width');
 
@@ -60,6 +60,7 @@ class Element {
     }
   };
 
+  // Keep the elements at the same offset coordinates to the parent when window size changes.
   onWindowResize = () => {
     if (this.offSetsModel.isInCanvas(this.canvas, this.element)) {
       const shiftedCoords = this.offSetsModel.calculateShiftedCoords(this.canvas);

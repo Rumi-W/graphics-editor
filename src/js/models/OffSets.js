@@ -1,3 +1,7 @@
+/* 
+  This class keeps track of Element's offsets to the parent.
+*/
+
 class Offsets {
   constructor(offsetImgElem, label) {
     this.offsetImgElem = offsetImgElem;
