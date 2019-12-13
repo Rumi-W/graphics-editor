@@ -21,7 +21,6 @@ class Offsets {
   };
 
   calculateOffsetToParent = (parentElem, elem) => {
-    console.log(parentElem.getBoundingClientRect().left, this.offset.x);
     this.setOffsetX(
       Math.round(elem.getBoundingClientRect().left - parentElem.getBoundingClientRect().left)
     );

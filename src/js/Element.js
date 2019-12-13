@@ -4,6 +4,7 @@ class Element {
     this.offSetsModel = offSetsModel;
     this.elemOrigin = elOrigin;
     this.canvas = canvas;
+    this.windowResizeEvent = false;
 
     // Attributes for moving
     this.origX = this.element.getBoundingClientRect().left;
@@ -38,7 +39,10 @@ class Element {
       resizer.addEventListener('mouseup', this.onMouseUp);
     }
 
-    window.addEventListener('resize', this.onWindowResize);
+    if (!this.windowResizeEvent) {
+      window.addEventListener('resize', this.onWindowResize);
+      this.windowResizeEvent = true;
+    }
 
     // Cancel default ondragstart
     this.element.ondragstart = function() {
@@ -46,10 +50,25 @@ class Element {
     };
   };
 
+  unBindEvent = () => {
+    this.element.removeEventListener('mousedown', this.onMouseDown);
+    this.element.removeEventListener('mouseup', this.onMouseUp);
+
+    for (const resizer of this.resizers) {
+      resizer.removeEventListener('mousedown', this.onMouseDown);
+      resizer.removeEventListener('mouseup', this.onMouseUp);
+    }
+  };
+
   onWindowResize = () => {
     if (this.offSetsModel.isInCanvas(this.canvas, this.element)) {
       const shiftedCoords = this.offSetsModel.calculateShiftedCoords(this.canvas);
       this.moveTo(shiftedCoords.x, shiftedCoords.y);
+    }
+    if (this.textElem.isText) {
+      const width = window.getComputedStyle(this.element, null).getPropertyValue('width');
+      const fontSize = width * this.textElem.fontSpaceRatio;
+      this.element.style.fontSize = Math.round(fontSize) + 'px';
     }
   };
 
@@ -67,13 +86,11 @@ class Element {
 
     // 1=Moving, 2=Resizing
     if (this.status === 1) {
-      console.log('moving');
       this.currentResizer = null;
       this.shiftX = e.clientX - this.element.getBoundingClientRect().left;
       this.shiftY = e.clientY - this.element.getBoundingClientRect().top;
       document.addEventListener('mousemove', this.startMoving);
     } else if (this.status === 2) {
-      console.log('resizing');
       this.currentResizer = target;
       this.startX = e.clientX;
       this.startY = e.clientY;
