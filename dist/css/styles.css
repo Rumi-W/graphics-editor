@@ -20,8 +20,6 @@ main {
   justify-content: center;
 }
 aside {
-  /* position: relative; */
-  /* left: 0; */
   width: 20%;
   min-width: 20rem;
   padding: 2%;
@@ -31,7 +29,6 @@ aside {
   justify-content: flex-start;
   align-items: center;
 }
-
 .box {
   display: inline-block;
   width: 20vmin;
@@ -39,7 +36,6 @@ aside {
   border: 1px #e8e8e8 dashed;
   background-color: #fff;
 }
-
 .box.text-origin {
   display: inline-block;
   margin-top: 5rem;
@@ -50,7 +46,6 @@ aside {
   border: 1px #e8e8e8 dashed;
   background-color: #fff;
 }
-
 section {
   width: 80%;
   min-width: 8rem;
@@ -60,7 +55,6 @@ section {
   justify-content: center;
   align-items: center;
 }
-
 .offset {
   display: flex;
   flex-direction: column;
@@ -76,18 +70,15 @@ section {
   -moz-box-shadow: 10px 14px 5px -1px rgba(194, 194, 194, 1);
   box-shadow: 10px 14px 5px -1px rgba(194, 194, 194, 1);
 }
-
 .offset-img,
 .offset-text {
   margin-top: 0.2rem;
   font-size: 1.4rem;
 }
-
 .button-holder {
   justify-content: flex-end;
   display: flex;
 }
-
 .button {
   margin-right: 1rem;
   outline: none;
@@ -114,7 +105,6 @@ section {
   position: relative;
   top: 1px;
 }
-
 .canvas {
   width: 80vmin;
   height: 80vmin;
@@ -124,7 +114,6 @@ section {
   -moz-box-shadow: 10px 10px 5px -1px rgba(194, 194, 194, 1);
   box-shadow: 10px 10px 5px -1px rgba(194, 194, 194, 1);
 }
-
 .item-img {
   position: absolute;
   width: 20vmin;
@@ -134,7 +123,6 @@ section {
   background-size: cover;
   cursor: pointer;
 }
-
 .item-text {
   display: inline-block;
   position: absolute;
@@ -147,7 +135,6 @@ section {
   text-align: center;
   cursor: pointer;
 }
-
 .select-diabled {
   user-select: none; /* supported by Chrome and Opera */
   -webkit-user-select: none; /* Safari */
@@ -155,7 +142,6 @@ section {
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
 }
-
 .resizer {
   position: absolute;
   width: 1.2rem;
@@ -163,31 +149,26 @@ section {
   background-color: #000;
   z-index: 30;
 }
-
 .resizer.ne {
   top: -1px;
   right: -1px;
   cursor: ne-resize;
 }
-
 .resizer.nw {
   top: -1px;
   left: -1px;
   cursor: nw-resize;
 }
-
 .resizer.se {
   bottom: -1px;
   right: -1px;
   cursor: se-resize;
 }
-
 .resizer.sw {
   bottom: -1px;
   left: -1px;
   cursor: sw-resize;
 }
-
 .hidden {
   display: none;
 }
